@@ -2,15 +2,19 @@ import csv
 from HashTable import HashTable
 
 truck1 = []
-truck1_list = ["1", "13", "14", "15", "16", "20", "29", "30", "31", "34", "37", "40"]
+truck1_list = ["1", "13", "14", "15", "16", '19', "20", "29", "30", "31", "34", "37", "40"]
 truck2 = []
-truck2_list = ["2", "3", "6", "8", "10", "12", "18", "21", "23", "25", '27", "28', '32', '36', '38']
+truck2_list = ["2", "3", "8", "10", "12", "18", "21", "23", '27', '36', '38']
 truck3 = []
-truck3_list = ["4", "5", "7", "9", '11', '17', '19', '22', '24', '26', '33', '35', '39']
+truck3_list = ["4", "5", "6", "7", "9", '11', '17', '22', '24', "25", '26', '28', '32', '33', '35', '39']
 package_hash = HashTable()
 keys = []
 
-# Read in package data
+'''
+This reads the package data from the Packages csv and adds them to a hash map for retrieval later. Each packages is 
+loaded on to a truck based on the lists above. Each package starts with the status "At hub".
+Runs in O(n)
+'''
 with open('Data/Packages.csv', 'r') as csvfile:
     package_data = csv.reader(csvfile, delimiter=',')
 
@@ -32,45 +36,13 @@ with open('Data/Packages.csv', 'r') as csvfile:
         package_hash.insert(key, values)
         keys.append(key)
 
-        i = 0
-        j = 0
-        k = 0
-        x = 0
-
         if row[0] in truck1_list:
             truck1.append(values)
         if row[0] in truck2_list:
             truck2.append(values)
         if row[0] in truck3_list:
             truck3.append(values)
-        '''
-        if len(truck1) < 16:
-            truck1.append(values)
-        elif len(truck2) < 16:
-            truck2.append(values)
-        else:
-            truck3.append(values)
-        '''
-        '''
-        while i < len(keys):
-            while j < len(truck1_list):
-                if truck1_list[j] == keys[i]:
-                    truck1.append(values)
-                j += 1
-            i += 1
-        '''
-        # while i < len(keys):
-        #     while k < len(truck2_list):
-        #         if truck2_list[k] == keys[i]:
-        #             truck2.append(values)
-        #         k += 1
-        #     i += 1
-        # while i < len(keys):
-        #     while x < len(truck3_list):
-        #         if truck3_list[x] == keys[i]:
-        #             truck3.append(values)
-        #         x += 1
-        #     i += 1
+
 
     def truck1_loaded():
         return truck1
@@ -84,10 +56,10 @@ with open('Data/Packages.csv', 'r') as csvfile:
     def get_hash():
         return package_hash
 
-print(truck1)
-print(truck2)
-print(truck3)
+#print(truck1)
+#print(truck2)
+#print(truck3)
 #
-print(len(truck1))
-print(len(truck2))
-print(len(truck3))
+#print(len(truck1))
+#print(len(truck2))
+#print(len(truck3))
